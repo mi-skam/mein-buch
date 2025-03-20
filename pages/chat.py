@@ -3,22 +3,20 @@ import streamlit as st
 from pages.utils import show_all_messages, response_generator
 from openai import OpenAI
 
-## CONFIGURATION
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 greetings = [
-     '''Hallo, ich bin der Chatbot von "Kennst du mein Buch?", und du kannst mir einen Buchtitel nennen und wir werden uns darüber unterhalten.'''
+    """Hallo, ich bin der Chatbot von "Kennst du mein Buch?", und du kannst mir einen Buchtitel nennen und wir werden uns darüber unterhalten."""
 ]
+client = OpenAI(api_key=st.session_state.key)
 
-## STATE
-if "model" not in st.session_state:
-    st.session_state.model = "gpt-3.5-turbo"
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+st.button(
+    "Neustart", on_click=lambda: st.session_state.messages.clear(), type="secondary"
+)
 
 show_all_messages()
 
 ## LOGIC
+
 if prompt := st.chat_input("Deine Nachricht"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
