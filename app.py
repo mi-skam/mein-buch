@@ -29,7 +29,7 @@ st.session_state.key = st.secrets["OPENAI_API_KEY"]
 
 ## STATE
 if "model" not in st.session_state:
-    st.session_state.model = "gpt-3.5-turbo"
+    st.session_state.model = "gpt-4o-mini"
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
