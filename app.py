@@ -10,7 +10,7 @@ Ich bin ein Chatbot, der dir helfen kann, mehr über ein Buch heraus zu finden.
 
 st.write(content)
 
-start = st.button("Start", icon="🚀", use_container_width=True)
+start = st.button("Start", icon="🚀", use_container_width=True, type="primary")
 
 if start:
     st.write("Button was clicked!")

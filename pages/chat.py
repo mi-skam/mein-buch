@@ -1,10 +1,13 @@
 import streamlit as st
 
-from pages.utils import show_all_messages
+from pages.utils import show_all_messages, response_generator
 from openai import OpenAI
 
 ## CONFIGURATION
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+greetings = [
+     '''Hallo, ich bin der Chatbot von "Kennst du mein Buch?", und du kannst mir einen Buchtitel nennen und wir werden uns darüber unterhalten.'''
+]
 
 ## STATE
 if "model" not in st.session_state:
@@ -31,4 +34,8 @@ if prompt := st.chat_input("Deine Nachricht"):
             ],
         )
         response = st.write_stream(stream)
+        st.session_state.messages.append({"role": "assistant", "content": response})
+else:
+    with st.chat_message("assistant"):
+        response = st.write_stream(response_generator(greetings[0]))
         st.session_state.messages.append({"role": "assistant", "content": response})
