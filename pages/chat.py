@@ -4,6 +4,9 @@ import random
 from pages.utils import show_all_messages, response_generator
 from openai import OpenAI
 
+## CONFIGURATION
+st.session_state.key = st.secrets["OPENAI_API_KEY"]
+
 # Initial greeting message
 greeting_message = """Hallo, ich bin der Chatbot von "Kennst du mein Buch?", und du kannst mir einen Buchtitel nennen und wir werden uns darüber unterhalten."""
 
